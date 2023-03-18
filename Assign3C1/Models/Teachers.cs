@@ -11,7 +11,7 @@ namespace Assign3C1.Models
         public int teacherid;
         public string teacherfname;
         public string teacherlname;
-        public int employeenumber;
+        public string employeenumber;
         public DateTime hiredate;
         public decimal salary;
     }

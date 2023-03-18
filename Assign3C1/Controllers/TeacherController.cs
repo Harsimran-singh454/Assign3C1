@@ -35,5 +35,16 @@ namespace Assign3C1.Controllers
         }
 
 
+
+        // GET: /Teacher/search/{req}
+
+        public ActionResult search(string req)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teachers newTeacher = controller.teachersearch(req);
+
+            return View(newTeacher);
+        }
+
     }
 }

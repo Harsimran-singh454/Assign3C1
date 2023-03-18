@@ -1,23 +1,83 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding: 0px;
+    margin: 0px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar{
+    font-size: 50px;
+    text-align:center;
+    background-color: darkslateblue;
+
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+    .navbar a {
+        text-decoration: none;
+        color: white;
+    }
 
-.navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:focus {
-    background-color: #777;
-    border-color: #fff
-}
+    .navbar label {
+        color:white;
+    }
+
+    .navbar input{
+        padding: 1em;
+        border-radius: 5px;
+    }
+
+    .main{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+    }
+
+    .main *{
+        text-align:center;
+        text-decoration: none;
+        color:black;
+    }
+
+    .main h2{
+        font-size: 40px;
+        text-align:center;
+    }
+
+    .main h3{
+        font-size:25px;
+    }
+
+    .main .container{
+        border: 1px solid black;
+        width: 20%;
+        margin: 1em auto;
+        padding: 0.5em;
+    }
+
+        .main .container div {
+            padding:0.51em;
+            font-size:20px;
+        }
+
+        .main .container div:hover{
+            transform: scale(1.1);
+            transition: 0.3s;
+            background-color: darkgrey;
+            color: white;
+        }
+
+            .main .container div a:hover {
+            color:white;
+            transition:0.3s;
+            }
+
+    .list-container{
+        width:30%;
+        margin: 1px auto;
+    }
+
+    .list{
+        list-style:none;
+    }
+    .list li{
+        font-size: 20px;
+        padding:1em;
+    }

@@ -1,5 +1,6 @@
 ﻿using Assign3C1.Models;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,20 @@ namespace Assign3C1.Controllers
     {
         private SchoolDbContext data = new SchoolDbContext();
 
+        //This Controller is for accessing teachers data.
+        
+        
+        
+        
+        
+        /// <summary>
+        /// Returns a list of teachers
+        /// </summary>
+        /// <example>GET api/TeacherData/teacherList</example>
+        /// <returns>
+        /// A list of teachers
+        /// </returns>
+        
         [HttpGet]
         public IEnumerable<Teachers> teachersList()
         {
@@ -67,6 +82,16 @@ namespace Assign3C1.Controllers
             return Teacher;
         }
 
+
+
+
+
+
+        /// <summary>
+        /// Returns a teacher from the database according to the primary key teacherid
+        /// </summary>
+        /// <param name="id">the teacher's ID</param>
+        /// <returns>teacher's properties</returns>
         [HttpGet]
         public Teachers showTeacher(int id)
         {
@@ -89,7 +114,7 @@ namespace Assign3C1.Controllers
             while (Result.Read())
             {
                 int t_id = (int)Result["teacherid"];
-                string employeenumber =(string)Result["employeenumber"];
+                string employeenumber = (string)Result["employeenumber"];
                 string tFirstName = (string)Result["teacherfname"];
                 string tLastName = (string)Result["teacherlname"];
                 DateTime hiredate = (DateTime)Result["hiredate"];
@@ -105,5 +130,59 @@ namespace Assign3C1.Controllers
 
             return newTeacher;
         }
+
+
+
+
+
+
+        /// <summary>
+        /// Returns the searched item from the teachers database
+        /// </summary>
+        /// <param name="req">the input key</param>
+        /// <returns>Matching Result</returns>
+        [HttpGet]
+        [Route("api/TeacherDate/teachersearch/{req}")]
+        public Teachers teachersearch(string req = null)
+        {
+
+
+            Teachers newTeacher = new Teachers();
+            // Initiate Connection
+            MySqlConnection Conn = data.AccessDatabase();
+
+            // Open the connection between the web server and database
+            Conn.Open();
+
+            // Create a new command for database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL command
+            cmd.CommandText = "Select * from Teachers where teacherfname LIKE '%" + req + "%' OR teacherlname LIKE '%" + req + "%' OR hiredate = '%" + req + "%' OR salary = '%" + req + "%'";
+
+            MySqlDataReader Result = cmd.ExecuteReader();
+
+
+            while (Result.Read())
+            {
+                int t_id = (int)Result["teacherid"];
+                string employeenumber = (string)Result["employeenumber"];
+                string tFirstName = (string)Result["teacherfname"];
+                string tLastName = (string)Result["teacherlname"];
+                DateTime hiredate = (DateTime)Result["hiredate"];
+                decimal salary = (decimal)Result["salary"];
+
+                newTeacher.teacherid = t_id;
+                newTeacher.employeenumber = employeenumber;
+                newTeacher.teacherfname = tFirstName;
+                newTeacher.teacherlname = tLastName;
+                newTeacher.hiredate = hiredate;
+                newTeacher.salary = salary;
+            }
+
+            return newTeacher;
+        }
+
+
     }
 }
