@@ -38,7 +38,6 @@ namespace Assign3C1.Controllers
 
             while (Result.Read())
             {
-                ;
                 string classcode = (string)Result["classcode"];
                 string classname = (string)Result["classname"];
 

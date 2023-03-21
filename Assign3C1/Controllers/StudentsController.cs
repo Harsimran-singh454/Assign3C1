@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assign3C1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,15 @@ namespace Assign3C1.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult list()
+        {
+            StudentDataController controller = new StudentDataController();
+            IEnumerable<Students> student = controller.listStudents();
+
+            return View(student);
+      
         }
     }
 }

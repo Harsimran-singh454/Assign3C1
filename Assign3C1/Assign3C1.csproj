@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ClassDataController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentDataController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\TeacherDataController.cs" />
@@ -260,10 +261,10 @@
     <Content Include="Views\Teacher\Show.cshtml" />
     <Content Include="Views\Teacher\search.cshtml" />
     <Content Include="Views\Classes\Courses.cshtml" />
+    <Content Include="Views\Students\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Students\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
