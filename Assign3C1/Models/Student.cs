@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Assign3C1.Models
 {
-    public class Students
+    public class Student
     {
         public int studentid;
         public string studentfname;

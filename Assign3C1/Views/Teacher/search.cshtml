@@ -1,7 +1,22 @@
-﻿
+﻿@model IEnumerable<Assign3C1.Models.Teacher>
 @{
-    ViewBag.Title = "search";
+    ViewBag.Title = "Search";
 }
 
-<h2>Search Results - </h2>
+<h2>Search Results</h2>
+<div>
+    <form method="get" action="/Teacher/search">
+        <label for="input">Search Teachers:</label>
+        <input name="input" type="text" placeholder="name, hiredate, salary..">
+        <input type="submit" value="Search">
+    </form>
+</div>
 
+<h3>List of All the teachers</h3>
+
+<div class="container">
+    @foreach (var teacher in Model)
+    {
+        <div> <a href="/Teacher/Show/@teacher.teacherid"> @teacher.teacherfname @teacher.teacherlname </a> --- <a href="/Classes/Courses/@teacher.teacherid"> Courses </a></div>
+    }
+</div>

@@ -33,7 +33,7 @@ namespace Assign3C1.Controllers
         /// </returns>
         
         [HttpGet]
-        public IEnumerable<Teachers> teachersList()
+        public IEnumerable<Teacher> teachersList()
         {
             // Initiate Connection
             MySqlConnection Conn = data.AccessDatabase();
@@ -50,7 +50,7 @@ namespace Assign3C1.Controllers
 
             MySqlDataReader Result = cmd.ExecuteReader();
 
-            List<Teachers> Teacher = new List<Teachers>();
+            List<Teacher> Teacher = new List<Teacher>();
 
             //Loop Through Each Row the Result Set
             while (Result.Read())
@@ -63,7 +63,7 @@ namespace Assign3C1.Controllers
                 DateTime hiredate = (DateTime)Result["hiredate"];
                 decimal salary = (decimal)Result["salary"];
 
-                Teachers newTeacher = new Teachers();
+                Teacher newTeacher = new Teacher();
                 newTeacher.teacherid = t_id;
                 newTeacher.teacherfname = tFirstName;
                 newTeacher.teacherlname = tLastName;
@@ -93,9 +93,9 @@ namespace Assign3C1.Controllers
         /// <param name="id">the teacher's ID</param>
         /// <returns>teacher's properties</returns>
         [HttpGet]
-        public Teachers showTeacher(int id)
+        public Teacher showTeacher(int id)
         {
-            Teachers newTeacher = new Teachers();
+            Teacher newTeacher = new Teacher();
             // Initiate Connection
             MySqlConnection Conn = data.AccessDatabase();
 
@@ -142,12 +142,9 @@ namespace Assign3C1.Controllers
         /// <param name="req">the input key</param>
         /// <returns>Matching Result</returns>
         [HttpGet]
-        [Route("api/TeacherDate/teachersearch/{req}")]
-        public Teachers teachersearch(string req = null)
+        [Route("api/teacherdata/teachersearch/{search?}")]
+        public IEnumerable<Teacher> teachersSearch(string input = null)
         {
-
-
-            Teachers newTeacher = new Teachers();
             // Initiate Connection
             MySqlConnection Conn = data.AccessDatabase();
 
@@ -158,29 +155,40 @@ namespace Assign3C1.Controllers
             MySqlCommand cmd = Conn.CreateCommand();
 
             // SQL command
-            cmd.CommandText = "Select * from Teachers where teacherfname LIKE '%" + req + "%' OR teacherlname LIKE '%" + req + "%' OR hiredate = '%" + req + "%' OR salary = '%" + req + "%'";
-
+            cmd.CommandText = "Select * from Teachers where teacherfname = " + input;
+            cmd.Parameters.AddWithValue("@key", "%" + input + "%");
+            cmd.Prepare();
             MySqlDataReader Result = cmd.ExecuteReader();
 
+            List<Teacher> Teacher = new List<Teacher>();
 
+            //Loop Through Each Row the Result Set
             while (Result.Read())
             {
+                //Access Column information by the DB column name as an index
+
                 int t_id = (int)Result["teacherid"];
-                string employeenumber = (string)Result["employeenumber"];
                 string tFirstName = (string)Result["teacherfname"];
                 string tLastName = (string)Result["teacherlname"];
                 DateTime hiredate = (DateTime)Result["hiredate"];
                 decimal salary = (decimal)Result["salary"];
 
+                Teacher newTeacher = new Teacher();
                 newTeacher.teacherid = t_id;
-                newTeacher.employeenumber = employeenumber;
                 newTeacher.teacherfname = tFirstName;
                 newTeacher.teacherlname = tLastName;
                 newTeacher.hiredate = hiredate;
                 newTeacher.salary = salary;
+
+                //Add the Author Name to the List
+
+                Teacher.Add(newTeacher);
             }
 
-            return newTeacher;
+            //Close the connection between the MySQL Database and the WebServer
+            Conn.Close();
+            //Return the final list of author names
+            return Teacher;
         }
 
 

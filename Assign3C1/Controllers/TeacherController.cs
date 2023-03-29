@@ -19,9 +19,9 @@ namespace Assign3C1.Controllers
         public ActionResult List()
         {
             TeacherDataController controller = new TeacherDataController();
-            IEnumerable<Teachers> Teacher = controller.teachersList();
+            IEnumerable<Teacher> Teachers = controller.teachersList();
            
-            return View(Teacher);
+            return View(Teachers);
         }
 
 
@@ -29,9 +29,9 @@ namespace Assign3C1.Controllers
         public ActionResult Show(int id)
         {
             TeacherDataController controller = new TeacherDataController();
-            Teachers newTeacher = controller.showTeacher(id);
+            Teacher teacher_info = controller.showTeacher(id);
             
-            return View(newTeacher);
+            return View(teacher_info);
         }
 
 
@@ -41,9 +41,9 @@ namespace Assign3C1.Controllers
         public ActionResult search(string req)
         {
             TeacherDataController controller = new TeacherDataController();
-            Teachers newTeacher = controller.teachersearch(req);
-
-            return View(newTeacher);
+            IEnumerable<Teacher> search_result = controller.teachersSearch(req);
+            
+            return View(search_result);
         }
 
     }

@@ -202,9 +202,9 @@
     </Compile>
     <Compile Include="Models\Classes.cs" />
     <Compile Include="Models\SchoolDbContext.cs" />
-    <Compile Include="Models\Students.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\studentsxclasses.cs" />
-    <Compile Include="Models\Teachers.cs" />
+    <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,7 @@ namespace Assign3C1.Controllers
             return View();
         }
 
+
         public ActionResult Courses(int id)
         {
             ClassDataController controller = new ClassDataController();

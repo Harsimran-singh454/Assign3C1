@@ -6,8 +6,11 @@
     ViewBag.Title = "Courses";
 }
 
-    <div class="list-container">
-        @Model.classname
-    </div>
+<h2>Teacher Information</h2>
 
-
+<div class="list-container">
+    <ul class="list">
+        <li> <strong> Class Code : </strong> @Model.classcode</li>
+        <li> <strong> Class Name : </strong> @Model.classname</li>
+    </ul>
+</div>

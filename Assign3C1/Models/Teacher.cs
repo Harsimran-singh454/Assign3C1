@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Assign3C1.Models
 {
-    public class Teachers
+    public class Teacher
     {
         // Information about teacher
         public int teacherid;

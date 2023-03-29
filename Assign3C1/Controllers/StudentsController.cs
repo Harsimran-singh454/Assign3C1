@@ -15,10 +15,12 @@ namespace Assign3C1.Controllers
             return View();
         }
 
+        // GET: Students/list
+
         public ActionResult list()
         {
             StudentDataController controller = new StudentDataController();
-            IEnumerable<Students> student = controller.listStudents();
+            IEnumerable<Student> student = controller.listStudents();
 
             return View(student);
       

@@ -15,6 +15,13 @@ namespace Assign3C1.Controllers
     {
         private SchoolDbContext data = new SchoolDbContext();
 
+
+        /// <summary>
+        /// Returns a classes of particular teacher who's id is passed in function
+        /// </summary>
+        /// <param name="id">the teacher ID</param>
+        /// <returns>teacher's classes</returns>
+        /// 
         [HttpGet]
     //    [Route("api/TeacherData/showCourses/{id}")]
         public IEnumerable<Classes> showCourses(int id)

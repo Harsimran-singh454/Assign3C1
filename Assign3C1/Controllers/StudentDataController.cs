@@ -14,7 +14,7 @@ namespace Assign3C1.Controllers
         private SchoolDbContext data = new SchoolDbContext();
 
         [HttpGet]
-        public IEnumerable<Students> listStudents()
+        public IEnumerable<Student> listStudents()
         {
             // Initiate Connection
             MySqlConnection Conn = data.AccessDatabase();
@@ -31,7 +31,7 @@ namespace Assign3C1.Controllers
 
             MySqlDataReader Result = cmd.ExecuteReader();
 
-            List<Students> student = new List<Students>();
+            List<Student> student = new List<Student>();
 
             //Loop Through Each Row the Result Set
             while (Result.Read())
@@ -44,7 +44,7 @@ namespace Assign3C1.Controllers
                 string studentnumber = (string)Result["studentnumber"];
             
 
-                Students newStudent = new Students();
+                Student newStudent = new Student();
                 newStudent.studentid = s_id;
                 newStudent.studentfname = sFirstName;
                 newStudent.studentlname = sLastName;
