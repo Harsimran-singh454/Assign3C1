@@ -9,14 +9,22 @@
         <label for="input">Search Teachers:</label>
         <input name="input" type="text" placeholder="name, hiredate, salary..">
         <input type="submit" value="Search">
+        <a href="/Teacher/AddTeacher" style="padding:5px; background-color:lightblue; border-radius:10px">Add Teacher</a>
     </form>
 </div>
 
 <h3>List of All the teachers</h3>
 
-<div class="container">
+<div class="container" style="width:60%;">
     @foreach (var teacher in Model)
     {
-        <div> <a href="/Teacher/Show/@teacher.teacherid"> @teacher.teacherfname @teacher.teacherlname </a> --- <a href="/Classes/Courses/@teacher.teacherid"> Courses </a></div>
+        <div style="width:100%;">
+            <a href="/Teacher/Show/@teacher.teacherid"> @teacher.teacherfname @teacher.teacherlname </a> ---
+            <a href="/Classes/Courses/@teacher.teacherid"> Courses </a> | 
+            <a href="/Teacher/DeletePage/@teacher.teacherid" style="background-color:red; color:white; border-radius:12px; padding:10px">Delete</a>
+
+        </div>
+
     }
+
 </div>

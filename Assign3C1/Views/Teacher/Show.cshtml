@@ -10,7 +10,8 @@
         <li> <strong> Employee Number : </strong> @Model.employeenumber</li>
         <li> <strong> Name : </strong> @Model.teacherfname @Model.teacherlname</li>
         <li> <strong> Salary : </strong> @Model.salary</li>
-        <li> <strong> Hired On : </strong> @Model.hiredate</li>
+        <li> <strong> Hired On : </strong> @Model.hiredate.ToString("dd-MMM-yyyy")</li>
+        <a style="color:white; background-color:red; padding:1%;" href="/Teacher/DeletePage/@Model.teacherid">Delete</a>
     </ul>
 </div>
 

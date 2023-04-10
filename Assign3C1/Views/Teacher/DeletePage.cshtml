@@ -1,0 +1,15 @@
+﻿@model Assign3C1.Models.Teacher
+@{
+    ViewBag.Title = "DeletePage";
+}
+
+<h2>Are You Sure you want to remove @Model.teacherfname @Model.teacherlname?</h2>
+
+<p> click "Yes" to delete or, click 'Cancel' to go back. </p>
+
+<a href="/Teacher/List">Cancel</a>
+
+<form action="/Teacher/Delete/@Model.teacherid" method="post">
+    <button type="submit">Yes</button>
+</form>
+

@@ -45,9 +45,12 @@
         font-size:25px;
     }
 
-    .main .container{
-        border: 1px solid black;
-        width: 20%;
+.main {
+}
+    
+    .container{
+        border: 10px solid black;
+        width: 60%;
         margin: 1em auto;
         padding: 0.5em;
     }
@@ -70,7 +73,7 @@
             }
 
     .list-container{
-        width:30%;
+        width:60%;
         margin: 1px auto;
     }
 

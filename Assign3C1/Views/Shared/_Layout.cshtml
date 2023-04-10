@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/Site.css")
+
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/Main.js")
+
 </head>
 <body>
     <div class="navbar">
         <div class="container">
             <div class="navbar-header">
-                <a href="" style="text-align:center">Teachers List</a>
+                <a href="/Teacher/List" style="text-align:center">Teachers List</a>
                 <br> <a href="/Teacher/List"> Home </a>
             </div>
 

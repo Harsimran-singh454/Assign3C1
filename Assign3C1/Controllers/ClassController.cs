@@ -9,13 +9,13 @@ namespace Assign3C1.Controllers
 {
     public class ClassController : Controller
     {
-        // GET: Classes
+        // GET: /Classes
         public ActionResult Index()
         {
             return View();
         }
 
-
+        //GET: /Classes/Courses
         public ActionResult Courses(int id)
         {
             ClassDataController controller = new ClassDataController();
