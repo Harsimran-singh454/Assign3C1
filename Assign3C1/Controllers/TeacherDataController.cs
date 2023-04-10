@@ -200,6 +200,7 @@ namespace Assign3C1.Controllers
         /// <param name="newTeacher"> - this function takes an object as a parameter that contains info passed from the form. 
         /// </param>
         [HttpPost]
+
         public void addTeacherData(Teacher newTeacher)
         {
 

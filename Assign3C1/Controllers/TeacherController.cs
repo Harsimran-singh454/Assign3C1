@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.Web.Mvc;
+using System.Web.Http.Cors;
 
 
 namespace Assign3C1.Controllers
@@ -59,20 +60,28 @@ namespace Assign3C1.Controllers
         //POST: /Teacher/create
 
         [HttpPost]
-        public ActionResult create(string teacherfname, string teacherlname, string employeenumber, decimal salary)
+        public ActionResult create(decimal salary, string teacherfname=null, string teacherlname = null, string employeenumber = null)
         {
          
-            Debug.WriteLine("Method Reached!");
+            //Debug.WriteLine("Method Reached!");
             Debug.WriteLine("f-name:" + teacherfname +", l-name:" +teacherlname + ", empnum: "+employeenumber+ "salary: "+salary);
-
+            
+            // Teacher Object
             Teacher newTeacher = new Teacher();
 
+
+            // Validating Data
+            if (teacherfname == "" || teacherlname == "" || employeenumber == "" || salary == "")
+            {
+                return RedirectToAction("AddTeacher");
+            }
+            else { 
             newTeacher.teacherfname = teacherfname;
             newTeacher.teacherlname = teacherlname;
             newTeacher.employeenumber= employeenumber;
             newTeacher.salary= salary;
             newTeacher.hiredate= DateTime.Now;
-
+            }
             TeacherDataController controller = new TeacherDataController();
             controller.addTeacherData(newTeacher);
 
