@@ -9,13 +9,7 @@ window.onload = () => {
 
     // ---------------- A teacher Object to store values from form and pass through our API Controller ----------------
 
-	var newTeacher = {
-		teacherfname: "",
-		teacherlname: "",
-		employeenumber: "",
-		salary: "",
-		hiredate: "",
-	};
+
 
     createForm.addEventListener("submit", processform);
 
@@ -101,17 +95,27 @@ window.onload = () => {
         var salary = myForm.salary.value;
         var hiredate = myForm.hiredate.value;
 
+        var newTeacher = {
+            teacherfname: firstName,
+            teacherlname: lastName,
+            employeenumber: employee_number,
+            salary: salary,
+            hiredate: hiredate,
+        };
 
         var url = "https://localhost:44353/api/TeacherData/addTeacherData/" + newTeacher;
 
         var req = new XMLHttpRequest();
-        req.open("POST", url);
+        req.open("POST", url, true);
+        req.setRequestHeader("Content-Type", "application/json");
+
+
         req.onreadystatechange = () => {
             if (req.readyState == 4 && req.status == 200) {
-                var data = JSON.parse(req.responseText);
-
+                
             }
         }
+        req.send(JSON.stringify(newTeacher));
     }
 
 

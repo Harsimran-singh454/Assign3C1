@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "UpdateTeacher";
+}
+
+<h2>Update Teacher</h2>
+
+<a href="/Teacher/List" style="background-color:aquamarine; border-radius:10px; padding:3px; width:100px; margin:0px auto;">Go Back</a>
+
+<p>@ViewBag.Msg</p>
+<form name="updateForm" method="post" action="/Teacher/update/@Model.teacherid">
+    <div>
+        <label for="teacherfname">First Name:</label>
+        <input name="teacherfname" id="teacherfname" type="text" value="@Model.teacherfname" />
+    </div>
+
+    <div>
+        <label for="teacherlname">Last Name:</label>
+        <input name="teacherlname" id="teacherlname" type="text" value="@Model.teacherlname" />
+    </div>
+
+    <div>
+        <label for="employeenumber">Employee Number:</label>
+        <input name="employeenumber" id="employeenumber" type="text" value=@Model.employeenumber />
+    </div>
+
+    <div>
+        <label for="salary">Salary:(hourly)</label>
+        <input name="salary" id="salary" type="number" step="any" value="@Model.salary" />
+    </div>
+
+    <input type="submit" value="Update">
+</form>

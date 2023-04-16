@@ -71,7 +71,7 @@ namespace Assign3C1.Controllers
 
 
             // Validating Data
-            if (teacherfname == "" || teacherlname == "" || employeenumber == "" || salary == "")
+            if (teacherfname == "" || teacherlname == "" || employeenumber == "")
             {
                 return RedirectToAction("AddTeacher");
             }
@@ -89,14 +89,7 @@ namespace Assign3C1.Controllers
 
         }
 
-        //Post : /Teacher/DeleteConfirm/{id}
-        [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            TeacherDataController controller = new TeacherDataController();
-            controller.deleteTeacher(id);
-            return RedirectToAction("List");
-        }
+
 
 
         //GET: /Teacher/DeletePage/{id}
@@ -109,5 +102,44 @@ namespace Assign3C1.Controllers
             return View(teacher_info);
         }
 
+
+        //Post : /Teacher/DeleteConfirm/{id}
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            controller.deleteTeacher(id);
+            return RedirectToAction("List");
+        }
+
+
+
+
+        // GET: /Teacher/UpdateTeacher/{id}
+        public ActionResult UpdateTeacher(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher teacher= controller.FindTeacher(id); 
+            return View(teacher);
+        }
+
+        // POST: /Teacher/update
+        public ActionResult update(int id, decimal salary, string teacherfname = null, string teacherlname = null, string employeenumber = null)
+        {
+            TeacherDataController controller= new TeacherDataController();
+            Teacher teacherData = new Teacher();
+
+            teacherData.teacherid = id;
+            teacherData.teacherfname = teacherfname;
+            teacherData.teacherlname = teacherlname;
+            teacherData.salary = salary;
+            teacherData.employeenumber=employeenumber;
+
+
+            controller.update(id, teacherData);
+
+            return RedirectToAction("List");
+
+        }
     }
 }

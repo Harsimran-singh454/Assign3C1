@@ -8,8 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
-
+using System.Web.Http.Cors;
 
 namespace Assign3C1.Controllers
 {
@@ -141,7 +140,7 @@ namespace Assign3C1.Controllers
         /// <param name="req">the input key</param>
         /// <returns>Matching Result</returns>
         [HttpGet]
-        [Route("api/teacherdata/teachersearch/{search?}")]
+        [Route("api/teacherdata/teachersearch/{input?}")]
         public IEnumerable<Teacher> teachersSearch(string input = null)
         {
             // Initiate Connection
@@ -200,7 +199,7 @@ namespace Assign3C1.Controllers
         /// <param name="newTeacher"> - this function takes an object as a parameter that contains info passed from the form. 
         /// </param>
         [HttpPost]
-
+        [EnableCors(origins:"*", methods:"*", headers:"*")]
         public void addTeacherData(Teacher newTeacher)
         {
 
@@ -221,7 +220,7 @@ namespace Assign3C1.Controllers
             cmd.Parameters.AddWithValue("@employeenumber", newTeacher.employeenumber);
             cmd.Parameters.AddWithValue("@salary", newTeacher.salary);
             cmd.Parameters.AddWithValue("@hiredate", newTeacher.hiredate);
-            cmd.Prepare(); 
+            cmd.Prepare();
 
             cmd.ExecuteNonQuery();
 
@@ -264,21 +263,23 @@ namespace Assign3C1.Controllers
             while (Result.Read())
             {
                 //Access Column information by the DB column name as an index
-                
+
                 int t_id = (int)Result["teacherid"];
                 string tFirstName = (string)Result["teacherfname"];
                 string tLastName = (string)Result["teacherlname"];
+                string employeenumber = (string)Result["employeenumber"];
                 DateTime hiredate = (DateTime)Result["hiredate"];
                 decimal salary = (decimal)Result["salary"];
 
                 newTeacher.teacherid = t_id;
                 newTeacher.teacherfname = tFirstName;
                 newTeacher.teacherlname = tLastName;
+                newTeacher.employeenumber = employeenumber;
                 newTeacher.hiredate = hiredate;
                 newTeacher.salary = salary;
             }
             Conn.Close();
-             
+
             return newTeacher;
         }
 
@@ -314,7 +315,35 @@ namespace Assign3C1.Controllers
             cmd.Prepare();
 
             cmd.ExecuteNonQuery();
-            Conn.Close();   
+            Conn.Close();
+        }
+
+        [HttpPost]
+        public void update(int id, [FromBody()]Teacher teacherData)
+        {
+            // Initiate Connection
+            MySqlConnection Conn = data.AccessDatabase();
+
+            // Open the connection between the web server and database
+            Conn.Open();
+
+            // Create a new command for database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            // SQL command
+            cmd.CommandText = "UPDATE teachers set teacherfname = @teacherfname, teacherlname = @teacherlname, employeenumber = @employeenumber, salary=@salary , hiredate=@hiredate WHERE teacherid = @teacherid";
+
+            cmd.Parameters.AddWithValue("@teacherid", id);
+            cmd.Parameters.AddWithValue("@teacherfname", teacherData.teacherfname);
+            cmd.Parameters.AddWithValue("@teacherlname", teacherData.teacherlname);
+            cmd.Parameters.AddWithValue("@employeenumber", teacherData.employeenumber);
+            cmd.Parameters.AddWithValue("@salary", teacherData.salary);
+            cmd.Parameters.AddWithValue("@hiredate", teacherData.hiredate);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
         }
     }
 }
