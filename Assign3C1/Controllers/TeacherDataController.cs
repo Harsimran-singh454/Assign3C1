@@ -198,6 +198,18 @@ namespace Assign3C1.Controllers
         /// </summary>
         /// <param name="newTeacher"> - this function takes an object as a parameter that contains info passed from the form. 
         /// </param>
+        /// 
+        /// <example>
+        /// POST api/TeacherData/addTeacherData/11 
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"teacherfname":"Harsimran",
+        ///	"teacherlname":"Singh",
+        ///	"employeenumber":"T332",
+        ///	"salary":"77.7"
+        ///	""hiredate":1/2/2003
+        /// }
+        /// </example>
         [HttpPost]
         [EnableCors(origins:"*", methods:"*", headers:"*")]
         public void addTeacherData(Teacher newTeacher)
@@ -318,8 +330,26 @@ namespace Assign3C1.Controllers
             Conn.Close();
         }
 
+
+
+        /// <summary>
+        /// This function will add the data passed through update form, to the database
+        /// </summary>
+        /// <param name="id"> This is the primary key for identifying the record </param> 
+        /// <param name="teacherData"> This is an object that contains new data to update in the identified table record</param>
+
+        /// <example>
+        /// POST api/TeacherData/UpdateTeacher/11 
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"teacherfname":"Harsimran",
+        ///	"teacherlname":"Singh",
+        ///	"employeenumber":"T332",
+        ///	"salary":"77.7"
+        /// }
+        /// </example>
         [HttpPost]
-        public void update(int id, [FromBody()]Teacher teacherData)
+        public void UpdateTeacher(int id, [FromBody()]Teacher teacherData)
         {
             // Initiate Connection
             MySqlConnection Conn = data.AccessDatabase();

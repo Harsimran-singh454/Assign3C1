@@ -2,7 +2,7 @@
 window.onload = () => {
 
 
-	var createForm = document.forms.createForm;
+	var AddTeacherForm = document.forms.createForm;
     console.log(createForm);
 
 
@@ -11,17 +11,17 @@ window.onload = () => {
 
 
 
-    createForm.addEventListener("submit", processform);
+    AddTeacherForm.addEventListener("submit", checkValidation);
 
 
-    function processform(){
+    function checkValidation(){
         // ------------defining variables-----------
 
-        var firstName = myForm.teacherfname;
-        var lastName = myForm.teacherlname;
-        var employee_number = myForm.employeenumber;
-        var salary = myForm.salary;
-        var hiredate = myForm.hiredate;
+        var firstName = AddTeacherForm.teacherfname;
+        var lastName = AddTeacherForm.teacherlname;
+        var employee_number = AddTeacherForm.employeenumber;
+        var salary = AddTeacherForm.salary;
+        var hiredate = AddTeacherForm.hiredate;
  
 
 
@@ -84,16 +84,16 @@ window.onload = () => {
     }
 
 
-
+    ///  Addding Teacher Through AJAX Request
 
     function addTeacher() {
-        var createForm = document.forms.createForm;
+        var AddTeacherForm = document.forms.createForm;
 
-        var firstName = myForm.teacherfname.value;
-        var lastName = myForm.teacherlname.value;
-        var employee_number = myForm.employeenumber.value;
-        var salary = myForm.salary.value;
-        var hiredate = myForm.hiredate.value;
+        var firstName = AddTeacherForm.teacherfname.value;
+        var lastName = AddTeacherForm.teacherlname.value;
+        var employee_number = AddTeacherForm.employeenumber.value;
+        var salary = AddTeacherForm.salary.value;
+        var hiredate = AddTeacherForm.hiredate.value;
 
         var newTeacher = {
             teacherfname: firstName,
@@ -120,4 +120,58 @@ window.onload = () => {
 
 
 
+    /// Updating Teacher Through AJAX request
+
+
+    function UpdateTeacher() {
+        var UpdateTeacherForm = document.forms.updateForm;
+
+        var firstName = UpdateTeacherForm.teacherfname.value;
+        var lastName = UpdateTeacherForm.teacherlname.value;
+        var employee_number = UpdateTeacherForm.employeenumber.value;
+        var salary = UpdateTeacherForm.salary.value;
+        var hiredate = UpdateTeacherForm.hiredate.value;
+
+        // initializing object and assigning data
+        var TeacherData = {
+            teacherfname: firstName,
+            teacherlname: lastName,
+            employeenumber: employee_number,
+            salary: salary,
+            hiredate: hiredate,
+        };
+        // Api url for update controller function
+        var url = "https://localhost:44353/api/TeacherData/UpdateTeacher/" + TeacherData;
+
+        var req = new XMLHttpRequest();
+        req.open("POST", url, true);
+        req.setRequestHeader("Content-Type", "application/json");
+
+
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+
+            }
+        }
+        req.send(JSON.stringify(TeacherData));
+    }
+
+
+
+    // Delete Teacher using AJAX
+    
+    function DeleteTeacher(teacherid) {
+        var url = "https://localhost:44353/api/TeacherData/deleteTeacher/" + teacherid;
+        var req = new XMLHttpRequest();
+        req.open("POST", url, true);
+        req.setRequestHeader("Content-Type", "application/json");
+
+
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+
+            }
+        }
+    }
+        
 }

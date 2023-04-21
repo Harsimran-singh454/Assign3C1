@@ -136,7 +136,7 @@ namespace Assign3C1.Controllers
             teacherData.employeenumber=employeenumber;
 
 
-            controller.update(id, teacherData);
+            controller.UpdateTeacher(id, teacherData);
 
             return RedirectToAction("List");
 
